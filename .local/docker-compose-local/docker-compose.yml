@@ -1,0 +1,62 @@
+version: '3.9'
+
+x-node_image: &node_image
+  image: node:16.1.0-alpine
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - '8081:80'
+    volumes:
+      - $PWD/src:/var/www/html
+      - $PWD/docker-images/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - dinner-app
+    depends_on:
+      - php
+
+  php:
+    build: $PWD/docker-images/php
+    volumes:
+      - $PWD/src:/var/www/html
+    networks:
+      - dinner-app
+
+  mysql:
+    platform: linux/x86_64
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      TZ: Asia/Tokyo
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --secure-file-priv="/docker-entrypoint-initdb.d"
+    volumes:
+      - $PWD/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - $PWD/tmp/log/mysql:/var/log/mysql
+      - mysql-data:/var/lib/mysql
+    networks:
+      - dinner-app
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: password
+      TZ: Asia/Tokyo
+    ports:
+      - '9000:80'
+    networks:
+      - dinner-app
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:
+    external: false
+
+networks:
+  dinner-app:
+    external:
+      name: dinner-app
