@@ -60,7 +60,7 @@ final class SigninInputValidator
      *
      * @return void
      */
-    public function errorMesseges()
+    public function errorMessages()
     {
         $errors = [$this->emailErrorText(), $this->passwordErrorText()];
         return array_filter($errors);
