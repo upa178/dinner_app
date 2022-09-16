@@ -16,7 +16,7 @@
     <div class="modal" id="modal">
         <i class="far fa-user fa-2x modal-user" id="modal-user"></i>
         <p class="user-name">
-            <%= locals.username %>さん
+            <!-- ここにログインユーザーの名前を表示する -->
         </p>
         <a href="/login" class="modal-button">ログイン</a>
         <a href="/" class="modal-button">ホーム</a>
