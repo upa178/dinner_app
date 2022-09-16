@@ -4,7 +4,7 @@ namespace App\Domain\ValueObject;
 
 use Exception;
 
-final class Email
+final class Name
 {
     private $value;
     public function __construct(string $value)
