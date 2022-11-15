@@ -16,8 +16,7 @@ unset($_SESSION['errors']);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/new.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet">
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="script.js"></script> -->
@@ -35,7 +34,7 @@ unset($_SESSION['errors']);
                     </div>
                 </div>
             <?php endforeach; ?>
-            <form action="./Api/complete-user-register.php" method="post">
+            <form action="" method="post">
                 <input type="text" placeholder="メールアドレス" class="email" name="email">
                 <input type="text" placeholder="ユーザー名" class="user-name" name="user-name">
                 <input type="password" placeholder="パスワード" class="password" name="password">
@@ -44,6 +43,13 @@ unset($_SESSION['errors']);
             </form>
         </div>
     </div>
+    <div class="complete-password">
+        <div class="">
+            <h5>アカウントが作成できました。</h5>
+            <a class="button-complete" href="/signin.php">ログイン</a>
+        </div>
+    </div>
 </body>
 
 </html>
+<script src="signup.js"></script>

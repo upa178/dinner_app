@@ -18,7 +18,6 @@
         <p class="user-name">
             <!-- ここにログインユーザーの名前を表示する -->
         </p>
-        <a href="/login" class="modal-button">ログイン</a>
         <a href="/" class="modal-button">ホーム</a>
         <a href="/dinner" class="modal-button">晩御飯登録</a>
         <a href="/list" class="modal-button">一覧を見る</a>

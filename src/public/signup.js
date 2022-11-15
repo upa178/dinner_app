@@ -3,12 +3,22 @@ userRegisterButton.addEventListener(
   'click',
   async function (event) {
     event.preventDefault();
+    const emailInput = document.querySelector('.email');
+    const email = emailInput.value;
+    const userNameInput = document.querySelector('.user-name');
+    const userName = userNameInput.value;
     const passwordInput = document.querySelector('.password');
     const password = passwordInput.value;
     const confirmPasswordInput = document.querySelector('.confirm-password');
     const confirmPassword = confirmPasswordInput.value;
 
-    if (password === '') {
+    if(email === ''){
+      alert('メールアドレスを入力してください。');
+      return;
+    }else if(userName === '') {
+      alert('ユーザー名を入力してください。');
+      return;
+    } else if (password === '') {
       alert('パスワードを入力してください。');
       return;
     } else if (confirmPassword === '') {
@@ -19,6 +29,8 @@ userRegisterButton.addEventListener(
       return;
     }
     const obj = {
+      email,
+      userName,
       password,
       confirmPassword,
     };
@@ -27,7 +39,8 @@ userRegisterButton.addEventListener(
       Accept: 'application/json',
       'Content-Type': 'application/json',
     };
-    const response = await fetch('Api/complete-user-register.php', {
+
+    const response = await fetch('/Api/complete-user-register.php', {
       method: 'POST',
       headers,
       body,
@@ -36,11 +49,11 @@ userRegisterButton.addEventListener(
     const json = await response.json();
     if (json.data.status) {
       const userPasswordDisplay = document.querySelector(
-        '.user-password__display'
+        '.login-new-wrp'
       );
       const completePassword = document.querySelector('.complete-password');
-      userPasswordDisplay.classList.add('remove3');
-      completePassword.classList.add('show3');
+      userPasswordDisplay.classList.add('remove');
+      completePassword.classList.add('show');
     }
   },
   false
