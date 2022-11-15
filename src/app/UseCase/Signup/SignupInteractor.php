@@ -10,7 +10,7 @@ final class SignupInteractor implements Signup
 {
     private $input;
     private $userRepository;
-    public function __construct($input, UserRepository $userRepository)
+    public function __construct(SignupInput $input, UserRepository $userRepository)
     {
         $this->input = $input;
         $this->userRepository = $userRepository;

@@ -29,4 +29,26 @@ EOF;
         $stmt->bindvalue(':password', $password, PDO::PARAM_STR);
         return $stmt->execute();
     }
+
+    public function findByEmail(
+        string $email
+    ) {
+        $sql = <<<EOF
+    SELECT 
+        *
+    FROM 
+        users
+    WHERE
+        email = :email
+EOF;
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return empty($user) ? null : $user;
+    }
 }
